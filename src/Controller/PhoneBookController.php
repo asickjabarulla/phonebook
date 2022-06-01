@@ -28,7 +28,7 @@ class PhoneBookController extends AbstractController
      */
     
     #[Route('/api/phonebook/list', name: 'app_phone_book_list', methods: 'GET')]
-    public function list(): Response
+    public function listCustomerPhoneBook(): Response
     {
         $phoneBookList = $this->phoneBookRepository->findAll();
         $phoneBookdata = [];
@@ -53,7 +53,7 @@ class PhoneBookController extends AbstractController
      * method : POST
      */
     #[Route('/api/phonebook/add', name: 'app_phone_book_add', methods: 'POST' )]
-    public function add(Request $request): Response
+    public function addCustomerPhoneBook(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
         $firstName = $data['firstName'];
@@ -76,7 +76,7 @@ class PhoneBookController extends AbstractController
      * method : PUT
      */
     #[Route('/api/phonebook/update/{id}', name: 'app_phone_book_update', methods: 'PUT')]
-    public function updatePhoneBook($id,Request $request): Response
+    public function editCustomerPhoneBook($id,Request $request): Response
     {
     $phoneBook = $this->phoneBookRepository->findOneBy(['id' => $id]);  
     $data = json_decode($request->getContent(), true);
@@ -108,7 +108,7 @@ class PhoneBookController extends AbstractController
 
     /**
      * phone book search function
-     * route url: /api/phonebook/search/{filter}
+     * route url: /api/phonebook/search/{name}
      * method : POST
      * {name} is query string (first name or last name ) pass to URL 
      */
